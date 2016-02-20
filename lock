@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+##simple
+#scrot /tmp/screenshot.png
+#convert /tmp/screenshot.png -blur 0x5 /tmp/screenshotblur.png
+#i3lock -i /tmp/screenshotblur.png
+
+##cool
+icon="$HOME/Pictures/Lock-icon.png"
+tmpbg='/tmp/screen.png'
+
+(( $# )) && { icon=$1; }
+
+scrot "$tmpbg"
+convert "$tmpbg" -scale 10% -scale 1000% -fill pink -colorize 75% "$tmpbg"
+convert "$tmpbg" "$icon" -gravity center -composite -matte "$tmpbg"
+i3lock -u -i "$tmpbg"
